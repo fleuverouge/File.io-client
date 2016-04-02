@@ -1,0 +1,53 @@
+Pods/Manifest.lock
+Pods/Alamofire/LICENSE
+Pods/Alamofire/README.md
+Pods/Alamofire/Source/Alamofire.swift
+Pods/Alamofire/Source/Download.swift
+Pods/Alamofire/Source/Error.swift
+Pods/Alamofire/Source/Manager.swift
+Pods/Alamofire/Source/MultipartFormData.swift
+Pods/Alamofire/Source/NetworkReachabilityManager.swift
+Pods/Alamofire/Source/Notifications.swift
+Pods/Alamofire/Source/ParameterEncoding.swift
+Pods/Alamofire/Source/Request.swift
+Pods/Alamofire/Source/Response.swift
+Pods/Alamofire/Source/ResponseSerialization.swift
+Pods/Alamofire/Source/Result.swift
+Pods/Alamofire/Source/ServerTrustPolicy.swift
+Pods/Alamofire/Source/Stream.swift
+Pods/Alamofire/Source/Timeline.swift
+Pods/Alamofire/Source/Upload.swift
+Pods/Alamofire/Source/Validation.swift
+Pods/FontAwesome.swift/LICENSE
+Pods/FontAwesome.swift/README.md
+Pods/FontAwesome.swift/FontAwesome/Enum.swift
+Pods/FontAwesome.swift/FontAwesome/FontAwesome.otf
+Pods/FontAwesome.swift/FontAwesome/FontAwesome.swift
+Pods/Pods.xcodeproj/project.pbxproj
+Pods/Pods.xcodeproj/xcuserdata/hongha.xcuserdatad/xcschemes/Alamofire.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/hongha.xcuserdatad/xcschemes/FontAwesome.swift-FontAwesome.swift.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/hongha.xcuserdatad/xcschemes/FontAwesome.swift.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/hongha.xcuserdatad/xcschemes/Pods-FRFileIOClient.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/hongha.xcuserdatad/xcschemes/xcschememanagement.plist
+Pods/Target Support Files/Alamofire/Alamofire-dummy.m
+Pods/Target Support Files/Alamofire/Alamofire-prefix.pch
+Pods/Target Support Files/Alamofire/Alamofire-umbrella.h
+Pods/Target Support Files/Alamofire/Alamofire.modulemap
+Pods/Target Support Files/Alamofire/Alamofire.xcconfig
+Pods/Target Support Files/Alamofire/Info.plist
+Pods/Target Support Files/FontAwesome.swift/FontAwesome.swift-dummy.m
+Pods/Target Support Files/FontAwesome.swift/FontAwesome.swift-prefix.pch
+Pods/Target Support Files/FontAwesome.swift/FontAwesome.swift-umbrella.h
+Pods/Target Support Files/FontAwesome.swift/FontAwesome.swift.modulemap
+Pods/Target Support Files/FontAwesome.swift/FontAwesome.swift.xcconfig
+Pods/Target Support Files/FontAwesome.swift/Info.plist
+Pods/Target Support Files/Pods-FRFileIOClient/Info.plist
+Pods/Target Support Files/Pods-FRFileIOClient/Pods-FRFileIOClient-acknowledgements.markdown
+Pods/Target Support Files/Pods-FRFileIOClient/Pods-FRFileIOClient-acknowledgements.plist
+Pods/Target Support Files/Pods-FRFileIOClient/Pods-FRFileIOClient-dummy.m
+Pods/Target Support Files/Pods-FRFileIOClient/Pods-FRFileIOClient-frameworks.sh
+Pods/Target Support Files/Pods-FRFileIOClient/Pods-FRFileIOClient-resources.sh
+Pods/Target Support Files/Pods-FRFileIOClient/Pods-FRFileIOClient-umbrella.h
+Pods/Target Support Files/Pods-FRFileIOClient/Pods-FRFileIOClient.debug.xcconfig
+Pods/Target Support Files/Pods-FRFileIOClient/Pods-FRFileIOClient.modulemap
+Pods/Target Support Files/Pods-FRFileIOClient/Pods-FRFileIOClient.release.xcconfig

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UploadVC" customModule="FRFileIOClient" customModuleProvider="target">
+            <connections>
+                <outlet property="cancelBtn" destination="07Z-xy-Qiy" id="xBw-N5-FEW"/>
+                <outlet property="fileLabel" destination="pX6-I3-EWf" id="IXb-b7-igr"/>
+                <outlet property="progressView" destination="0Ex-q3-0kc" id="2TQ-pn-bX8"/>
+                <outlet property="prompt" destination="omu-No-Vyf" id="sAa-6r-Mkx"/>
+                <outlet property="timeSC" destination="PoE-Xr-Rw9" id="KJw-o1-W67"/>
+                <outlet property="timeTF" destination="5RO-87-ynJ" id="7Ub-sR-S4h"/>
+                <outlet property="uploadBtn" destination="f9N-8I-Mf6" id="JYx-3z-dtI"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="omu-No-Vyf">
+                    <rect key="frame" x="178" y="205" width="246" height="190"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IZX-dh-y3A">
+                            <rect key="frame" x="8" y="8" width="247" height="174"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About to upload" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pX6-I3-EWf">
+                                    <rect key="frame" x="0.0" y="0.0" width="247" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="File will be expired in:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JXL-11-ifA">
+                                    <rect key="frame" x="0.0" y="29" width="247" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DG5-id-Dk5">
+                                    <rect key="frame" x="0.0" y="58" width="247" height="30"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5RO-87-ynJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="E4Y-3x-5Kk"/>
+                                                <constraint firstAttribute="height" constant="30" id="mbl-0D-khD"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        </textField>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="PoE-Xr-Rw9">
+                                            <rect key="frame" x="38" y="1" width="209" height="29"/>
+                                            <segments>
+                                                <segment title="week(s)"/>
+                                                <segment title="month(s)"/>
+                                                <segment title="year(s)"/>
+                                            </segments>
+                                        </segmentedControl>
+                                    </subviews>
+                                </stackView>
+                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Ex-q3-0kc">
+                                    <rect key="frame" x="0.0" y="96" width="247" height="2"/>
+                                </progressView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f9N-8I-Mf6">
+                                    <rect key="frame" x="0.0" y="106" width="247" height="30"/>
+                                    <state key="normal" title="Upload"/>
+                                    <connections>
+                                        <action selector="didTapUpload:" destination="-1" eventType="touchUpInside" id="b5J-cT-NBi"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07Z-xy-Qiy">
+                                    <rect key="frame" x="0.0" y="144" width="247" height="30"/>
+                                    <state key="normal" title="Cancel"/>
+                                    <connections>
+                                        <action selector="didTapCancel:" destination="-1" eventType="touchUpInside" id="evD-wK-vb2"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="IZX-dh-y3A" firstAttribute="top" secondItem="omu-No-Vyf" secondAttribute="top" constant="8" id="53V-Ha-XtJ"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="400" id="Ghk-wi-Xxe"/>
+                        <constraint firstItem="IZX-dh-y3A" firstAttribute="leading" secondItem="omu-No-Vyf" secondAttribute="leading" constant="8" id="n57-UB-RbW"/>
+                        <constraint firstAttribute="bottom" secondItem="IZX-dh-y3A" secondAttribute="bottom" constant="8" id="nEx-Yu-ssq"/>
+                        <constraint firstAttribute="trailing" secondItem="IZX-dh-y3A" secondAttribute="trailing" constant="8" id="wis-HS-fNx"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.33710044620000001" green="0.36179864410000001" blue="0.38431018589999999" alpha="0.5" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="omu-No-Vyf" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="BJ0-dh-gyQ"/>
+                <constraint firstItem="omu-No-Vyf" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="voi-Kh-ava"/>
+                <constraint firstItem="omu-No-Vyf" firstAttribute="width" relation="lessThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="width" constant="-32" id="vq5-nD-J6F"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

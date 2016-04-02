@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="FileCell" customModule="FRFileIOClient" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bus-QP-Ttw">
+                    <rect key="frame" x="8" y="8" width="304" height="48"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T0z-jk-pYG">
+                            <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="T0z-jk-pYG" secondAttribute="height" multiplier="1:1" id="i04-LN-lWb"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pmv-lN-CWi">
+                            <rect key="frame" x="56" y="0.0" width="248" height="48"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="T0z-jk-pYG" firstAttribute="top" secondItem="bus-QP-Ttw" secondAttribute="top" id="Add-fs-hsu"/>
+                        <constraint firstItem="pmv-lN-CWi" firstAttribute="top" secondItem="bus-QP-Ttw" secondAttribute="top" id="Dfj-x2-uL1"/>
+                        <constraint firstItem="pmv-lN-CWi" firstAttribute="leading" secondItem="T0z-jk-pYG" secondAttribute="trailing" constant="8" id="Dh1-SR-t9Y"/>
+                        <constraint firstAttribute="bottom" secondItem="pmv-lN-CWi" secondAttribute="bottom" id="EoO-Nt-7cm"/>
+                        <constraint firstItem="T0z-jk-pYG" firstAttribute="leading" secondItem="bus-QP-Ttw" secondAttribute="leading" id="NPc-UW-XDV"/>
+                        <constraint firstAttribute="trailing" secondItem="pmv-lN-CWi" secondAttribute="trailing" id="S4c-F1-B0y"/>
+                        <constraint firstAttribute="bottom" secondItem="T0z-jk-pYG" secondAttribute="bottom" id="wlB-gp-dTo"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nh-tc-QXs">
+                    <rect key="frame" x="8" y="64" width="304" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="18" id="Njd-6S-Ulw"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="bus-QP-Ttw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="J1t-27-Knv"/>
+                <constraint firstItem="2nh-tc-QXs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Pdf-d1-0zK"/>
+                <constraint firstItem="bus-QP-Ttw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Q2n-0H-PfD"/>
+                <constraint firstAttribute="trailing" secondItem="2nh-tc-QXs" secondAttribute="trailing" constant="8" id="UBl-dI-Z5W"/>
+                <constraint firstAttribute="bottom" secondItem="2nh-tc-QXs" secondAttribute="bottom" constant="8" id="XpS-Vs-PYE"/>
+                <constraint firstItem="2nh-tc-QXs" firstAttribute="top" secondItem="bus-QP-Ttw" secondAttribute="bottom" constant="8" id="dl7-Wb-Kpy"/>
+                <constraint firstAttribute="trailing" secondItem="bus-QP-Ttw" secondAttribute="trailing" constant="8" id="gjv-bR-DCd"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="fileImageView" destination="T0z-jk-pYG" id="M1U-jJ-3io"/>
+                <outlet property="fileNameLabel" destination="pmv-lN-CWi" id="VDc-ua-9SX"/>
+                <outlet property="fileSizeLabel" destination="2nh-tc-QXs" id="Irj-hE-Scm"/>
+            </connections>
+            <point key="canvasLocation" x="196" y="325"/>
+        </view>
+    </objects>
+</document>

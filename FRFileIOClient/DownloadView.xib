@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DownloadView" customModule="FRFileIOClient" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nf-Rr-JMB">
+                    <rect key="frame" x="48" y="248" width="224" height="105"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BeC-Hm-Wfp">
+                            <rect key="frame" x="8" y="8" width="208" height="89"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Download file" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SJ8-cU-xnT">
+                                    <rect key="frame" x="0.0" y="0.0" width="208" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Getting file's information..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXo-ht-J80">
+                                    <rect key="frame" x="0.0" y="29" width="208" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0% downloaded" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iqy-iS-DhQ">
+                                    <rect key="frame" x="0.0" y="58" width="208" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4yH-1U-9si">
+                                    <rect key="frame" x="0.0" y="87" width="208" height="2"/>
+                                </progressView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="BeC-Hm-Wfp" secondAttribute="bottom" constant="8" id="Eoi-wK-UpU"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="FpQ-Ka-3O3"/>
+                        <constraint firstItem="BeC-Hm-Wfp" firstAttribute="top" secondItem="9nf-Rr-JMB" secondAttribute="top" constant="8" id="X9l-qw-zgO"/>
+                        <constraint firstAttribute="trailing" secondItem="BeC-Hm-Wfp" secondAttribute="trailing" constant="8" id="k7Z-iK-ksD"/>
+                        <constraint firstItem="BeC-Hm-Wfp" firstAttribute="leading" secondItem="9nf-Rr-JMB" secondAttribute="leading" constant="8" id="vCW-t5-9bx"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="9nf-Rr-JMB" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="3tz-Ih-VGK"/>
+                <constraint firstItem="9nf-Rr-JMB" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="64e-Of-bKv"/>
+                <constraint firstItem="9nf-Rr-JMB" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.7" priority="999" id="Dd3-NB-ikM"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="firstDescLabel" destination="gXo-ht-J80" id="m6i-39-dh9"/>
+                <outlet property="progressView" destination="4yH-1U-9si" id="i5Z-Bd-S6R"/>
+                <outlet property="secondDescLabel" destination="Iqy-iS-DhQ" id="Ys6-xR-mRo"/>
+                <outlet property="titleLabel" destination="SJ8-cU-xnT" id="Bd9-bi-GWR"/>
+            </connections>
+            <point key="canvasLocation" x="127" y="269"/>
+        </view>
+    </objects>
+</document>
