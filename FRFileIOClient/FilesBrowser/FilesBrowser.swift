@@ -184,6 +184,9 @@ class FilesBrowser: UIViewController, UICollectionViewDelegate, UICollectionView
     }
 
     @IBOutlet weak var emptyView: UIStackView!
+//    private let menu = XXXRoundMenuButton()
+    
+    @IBOutlet weak var menu: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -229,6 +232,35 @@ class FilesBrowser: UIViewController, UICollectionViewDelegate, UICollectionView
             }
         }
         
+        let items : [FontAwesome] = [FontAwesome.ShareSquareO, FontAwesome.Upload, FontAwesome.Edit, FontAwesome.TrashO, .Hashtag]
+        for i in 101...105 {
+            if let button = menu.subviewWithTag(i) as? UIButton {
+                let item = items[i - 101]
+                button.titleLabel?.font = UIFont.fontAwesomeOfSize(20)
+                button.setTitle(String.fontAwesomeIconWithName(item), forState: .Normal)
+                button.setCornerRadius(22)
+                button.backgroundColor = ColorTemplate.MainTint
+                button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+                switch item {
+                case .ShareSquareO:
+                    button.addTarget(self, action: #selector(FilesBrowser.didTapShare), forControlEvents: .TouchUpInside)
+                case .Upload:
+                    button.addTarget(self, action: #selector(FilesBrowser.didTapUpload), forControlEvents: .TouchUpInside)
+                case .Edit:
+                    button.addTarget(self, action: #selector(FilesBrowser.didTapRename), forControlEvents: .TouchUpInside)
+                case .TrashO:
+                    button.addTarget(self, action: #selector(FilesBrowser.didTapDelete), forControlEvents: .TouchUpInside)
+                case .Hashtag:
+                    button.addTarget(self, action: #selector(FilesBrowser.toggleMenu), forControlEvents: .TouchUpInside)
+                default:
+                    break
+                }
+            }
+        }
+        for i in 101...104 {
+            menu.subviewWithTag(i)?.hidden = true
+        }
+        menu.hidden = true
         updateItemSize()
         loadFilesList(nil)
     }
@@ -329,11 +361,31 @@ class FilesBrowser: UIViewController, UICollectionViewDelegate, UICollectionView
     
     }
     */
-
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if (action == .SelectFileToUpload) {
+            performUploadFile(files[indexPath.item])
+        }
+        else {
+            menu.hidden = false
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        if (action == .Browse) {
+            if collectionView.visibleCells().count == 0 {
+                hideMenu()
+                menu.hidden = true
+            }
+        }
+    }
+    
+    //MARK: -
     func loadFilesList(sender: AnyObject?) {
         defer {
             collectionView.hidden = files.count == 0
             emptyView.hidden = !collectionView.hidden
+            
         }
         if let rc = sender as? UIRefreshControl {
             rc.endRefreshing()
@@ -341,9 +393,9 @@ class FilesBrowser: UIViewController, UICollectionViewDelegate, UICollectionView
         let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
         
         do {
-        
+            
             let directoryContents = try NSFileManager.defaultManager().contentsOfDirectoryAtURL(documentsUrl, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions())
-//            print(files)
+            //            print(files)
             files = [FBFile]()
             for fileURL in directoryContents {
                 files.append(FBFile(fileUrl: fileURL))
@@ -357,14 +409,14 @@ class FilesBrowser: UIViewController, UICollectionViewDelegate, UICollectionView
         // if you want to filter the directory contents you can do like this:
         
         
-//        do {
-//            let directoryUrls = try  NSFileManager.defaultManager().contentsOfDirectoryAtURL(documentsUrl, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions())
-//            print(directoryUrls)
-//            let mp3Files = directoryUrls.filter{ $0.pathExtension == "mp3" }.map{ $0.lastPathComponent }
-//            print("MP3 FILES:\n" + mp3Files.description)
-//        } catch let error as NSError {
-//            print(error.localizedDescription)
-//        }
+        //        do {
+        //            let directoryUrls = try  NSFileManager.defaultManager().contentsOfDirectoryAtURL(documentsUrl, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions())
+        //            print(directoryUrls)
+        //            let mp3Files = directoryUrls.filter{ $0.pathExtension == "mp3" }.map{ $0.lastPathComponent }
+        //            print("MP3 FILES:\n" + mp3Files.description)
+        //        } catch let error as NSError {
+        //            print(error.localizedDescription)
+        //        }
     }
     
     func switchViewOption(sender: UIBarButtonItem) {
@@ -400,14 +452,181 @@ class FilesBrowser: UIViewController, UICollectionViewDelegate, UICollectionView
         layout.itemSize = cellSize
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if (action == .SelectFileToUpload) {
+    func performUploadFile(file: FBFile) {
+        let uploadVC = UploadVC(file: file)
+        uploadVC.showInView(self)
+    }
+    
+    // MARK: - Action
+    func didTapUpload() {
+        if let indexPath = collectionView.indexPathsForSelectedItems()?.first {
             performUploadFile(files[indexPath.item])
         }
     }
     
-    func performUploadFile(file: FBFile) {
-        let uploadVC = UploadVC(file: file)
-        uploadVC.showInView(self)
+    func didTapShare() {
+        if let indexPath = collectionView.indexPathsForSelectedItems()?.first {
+            let file = files[indexPath.item]
+            var activityItems = [AnyObject]()
+            if let key = file.key {
+                activityItems.append(key)
+            }
+            var gotData = false
+            if (file.type == .Image) {
+                if let image = UIImage(contentsOfFile: file.url.path!) {
+                    activityItems.append(image)
+                    gotData = true
+                }
+            }
+            if (!gotData) {
+                if let data = NSData(contentsOfFile: file.url.path!) {
+                    activityItems.append(data)
+                }
+            }
+//            let activityItems = [NSURL(string: fileUrl)!]
+            let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+            if let ppc = activityVC.popoverPresentationController {
+                ppc.sourceView = self.menu
+            }
+            self.presentViewController(activityVC, animated: true, completion: nil)
+        }
+    }
+    
+    func didTapRename() {
+        if let indexPath = collectionView.indexPathsForSelectedItems()?.first {
+            let file = files[indexPath.item]
+            var inputTextField: UITextField?
+            let namePrompt = UIAlertController(title: "Rename file", message: "Please file name", preferredStyle: UIAlertControllerStyle.Alert)
+            namePrompt.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+            namePrompt.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {[weak self] (action) -> Void in
+                if let itf = inputTextField,
+                    let text = itf.text where text.characters.count != 0 {
+                    var newFilename = text
+                    if let ext = file.extention {
+                        newFilename = text + "." + ext
+                    }
+                    let newPath = file.url.path!.stringByReplacingOccurrencesOfString(file.name, withString: "").stringByAppendingString(newFilename)
+
+                    do {
+                        try  NSFileManager.defaultManager().moveItemAtPath(file.url.path!, toPath: newPath)
+                        let urlStr = file.url.absoluteString.stringByReplacingOccurrencesOfString(file.name, withString: "").stringByAppendingString(newFilename)
+                        if let url = NSURL(string: urlStr) {
+                            self?.files[indexPath.item] = FBFile(fileUrl: url)
+                            FRQueue.Main.execute(closure: { 
+                                self?.collectionView.reloadItemsAtIndexPaths([indexPath])
+                            })
+                        }
+                        
+                    }
+                    catch let error as NSError {
+                        print("Rename file <ERROR> \(error)")
+                        FRQueue.Main.execute(closure: {
+                            self?.showError(error.localizedDescription)
+                        })
+                    }
+                }
+                }))
+            namePrompt.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+                var defaultFilename = file.name
+                if let ext = file.extention {
+                    defaultFilename = file.name.stringByReplacingOccurrencesOfString("." + ext, withString: "")
+                }
+                textField.placeholder = defaultFilename
+                inputTextField = textField
+            })
+            namePrompt.view.setNeedsLayout()
+            presentViewController(namePrompt, animated: true, completion: nil)
+        }
+    }
+    
+    func didTapDelete() {
+        if let indexPath = collectionView.indexPathsForSelectedItems()?.first {
+            let file = files[indexPath.item]
+            let alert = UIAlertController(title: "Delete file", message: "Do you want to delete file \(file.name)?", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { [weak self] (_) in
+                if NSFileManager.defaultManager().fileExistsAtPath(file.url.path!) {
+                    do {
+                        try NSFileManager.defaultManager().removeItemAtPath(file.url.path!)
+                        print("Deleted file \(file.url.path!)")
+                        if let me = self {
+                            try synchronized(me, block: {
+                                me.files.removeAtIndex(indexPath.item)
+                                FRQueue.Main.execute(closure: {
+                                    me.collectionView.deleteItemsAtIndexPaths([indexPath])
+                                })
+                            })
+                        }
+                    }
+                    catch let error as NSError {
+                        print("<ERROR> \(error)")
+                        FRQueue.Main.execute(closure: {
+                            self?.showError(error.localizedDescription)
+                        })
+                    }
+                }
+                }))
+            presentViewController(alert, animated: true, completion: nil)
+        }
+
+    }
+    
+    func showError(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    private var isMenuShown = false
+    
+    func toggleMenu() {
+        if (isMenuShown) {
+            hideMenu()
+        }
+        else {
+            showMenu()
+        }
+    }
+    
+    func hideMenu() {
+        if (!isMenuShown) {
+            return
+        }
+        isMenuShown = false
+        hideButton(101)
+    }
+    
+    func hideButton(tag: NSNumber) {
+//        print("hide button \(tag)")
+        let tagInt = tag.integerValue
+        if let button = self.menu.viewWithTag(tagInt) {
+            UIView.animateWithDuration(0.2, animations: {
+                button.hidden = true
+            })
+        }
+        if (tagInt < 104) {
+            performSelector(#selector(FilesBrowser.hideButton(_:)), withObject: NSNumber(integer: tagInt+1), afterDelay: 0.1)
+        }
+    }
+    
+    func showMenu() {
+        if (isMenuShown) {
+            return
+        }
+        isMenuShown = true
+        showButton(104)
+    }
+    
+    func showButton(tag: NSNumber) {
+//        print("show button \(tag)")
+        let tagInt = tag.integerValue
+        if let button = self.menu.viewWithTag(tagInt) {
+            UIView.animateWithDuration(0.2, animations: {
+                button.hidden = false
+            })
+        }
+        if (tagInt > 101) {
+            performSelector(#selector(FilesBrowser.showButton(_:)), withObject: NSNumber(integer: tagInt-1), afterDelay: 0.1)
+        }
     }
 }

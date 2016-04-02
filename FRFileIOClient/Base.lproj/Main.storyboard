@@ -314,17 +314,55 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="9B3-GC-wFA">
+                                <rect key="frame" x="515" y="295" width="44" height="284"/>
+                                <subviews>
+                                    <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FdE-YR-0fe">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="FdE-YR-0fe" secondAttribute="height" multiplier="1:1" id="CzE-ZF-o3L"/>
+                                        </constraints>
+                                    </button>
+                                    <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Azh-LT-6nD">
+                                        <rect key="frame" x="0.0" y="60" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Azh-LT-6nD" secondAttribute="height" multiplier="1:1" id="kGV-pS-Mx5"/>
+                                        </constraints>
+                                    </button>
+                                    <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8V5-oh-Tah">
+                                        <rect key="frame" x="0.0" y="120" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="8V5-oh-Tah" secondAttribute="height" multiplier="1:1" id="OAL-fQ-TdP"/>
+                                        </constraints>
+                                    </button>
+                                    <button opaque="NO" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10E-Sb-ljz">
+                                        <rect key="frame" x="0.0" y="180" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="10E-Sb-ljz" secondAttribute="height" multiplier="1:1" id="F9Q-gq-8K8"/>
+                                        </constraints>
+                                    </button>
+                                    <button opaque="NO" tag="105" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lsZ-4z-03g">
+                                        <rect key="frame" x="0.0" y="240" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="EfV-8a-RJu"/>
+                                            <constraint firstAttribute="width" constant="44" id="HK8-1a-uRn"/>
+                                        </constraints>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="rTe-AE-Q1N" firstAttribute="leading" secondItem="EKZ-aU-TLY" secondAttribute="leading" id="09U-pl-2gY"/>
                             <constraint firstItem="dvZ-PU-lcF" firstAttribute="top" secondItem="rTe-AE-Q1N" secondAttribute="bottom" id="Ban-41-7bB"/>
                             <constraint firstItem="86j-In-ecl" firstAttribute="centerY" secondItem="EKZ-aU-TLY" secondAttribute="centerY" id="Cev-yw-SWG"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="9B3-GC-wFA" secondAttribute="bottom" constant="21" id="RZr-Jh-kBt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="rTe-AE-Q1N" secondAttribute="trailing" id="SsH-bO-Ucz"/>
                             <constraint firstItem="86j-In-ecl" firstAttribute="centerX" secondItem="EKZ-aU-TLY" secondAttribute="centerX" id="bTT-X8-ucS"/>
                             <constraint firstItem="rTe-AE-Q1N" firstAttribute="top" secondItem="loP-ur-1sV" secondAttribute="bottom" id="c93-mF-KpG"/>
                             <constraint firstAttribute="trailing" secondItem="rTe-AE-Q1N" secondAttribute="trailing" id="cav-iV-TD6"/>
                             <constraint firstItem="rTe-AE-Q1N" firstAttribute="leading" secondItem="EKZ-aU-TLY" secondAttribute="leadingMargin" id="ge6-wH-3YU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9B3-GC-wFA" secondAttribute="trailing" constant="21" id="kd2-Mm-6Wz"/>
                             <constraint firstItem="dvZ-PU-lcF" firstAttribute="top" secondItem="rTe-AE-Q1N" secondAttribute="bottom" id="rvw-Nc-ru1"/>
                             <constraint firstItem="rTe-AE-Q1N" firstAttribute="top" secondItem="loP-ur-1sV" secondAttribute="bottom" id="sFI-3b-lWe"/>
                             <constraint firstItem="f7x-aM-yZU" firstAttribute="width" secondItem="EKZ-aU-TLY" secondAttribute="width" multiplier="0.25" id="urU-sO-r6o"/>
@@ -341,6 +379,7 @@
                     <connections>
                         <outlet property="collectionView" destination="rTe-AE-Q1N" id="axI-yq-gJQ"/>
                         <outlet property="emptyView" destination="86j-In-ecl" id="107-PY-Chv"/>
+                        <outlet property="menu" destination="9B3-GC-wFA" id="VBA-Vl-OrM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rcB-CE-g2G" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FRFileIOClient/ViewController.swift"
-            timestampString = "481266300.08289"
+            timestampString = "481275517.22521"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
             landmarkType = "5">
             <Locations>
@@ -54,17 +54,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FRFileIOClient/ViewController.swift"
-            timestampString = "481266337.589738"
+            filePath = "FRFileIOClient/APIClient.swift"
+            timestampString = "481283988.067821"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
-            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "download(_:fileNameHandler:progressHandler:completion:)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static FRFileIOClient.APIClient.(download (Swift.String, fileNameHandler : Swift.Optional&lt;(Swift.Optional&lt;Swift.String&gt;) -&gt; ()&gt;, progressHandler : Swift.Optional&lt;(Swift.Double) -&gt; ()&gt;, completion : Swift.Optional&lt;(result : FRFileIOClient.RequestResult) -&gt; ()&gt;) -&gt; Swift.Optional&lt;Alamofire.Request&gt;).(closure #2)"
+                  moduleName = "FRFileIOClient"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Data/xcode/zzz_My_repos/FileIOClient/FRFileIOClient/APIClient.swift"
+                  timestampString = "481283988.734203"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "1134">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static FRFileIOClient.APIClient.(download (Swift.String, fileNameHandler : Swift.Optional&lt;(Swift.Optional&lt;Swift.String&gt;) -&gt; ()&gt;, progressHandler : Swift.Optional&lt;(Swift.Double) -&gt; ()&gt;, completion : Swift.Optional&lt;(result : FRFileIOClient.RequestResult) -&gt; ()&gt;) -&gt; Swift.Optional&lt;Alamofire.Request&gt;).(closure #2)"
+                  moduleName = "FRFileIOClient"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Data/xcode/zzz_My_repos/FileIOClient/FRFileIOClient/APIClient.swift"
+                  timestampString = "481283988.734388"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "1551">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

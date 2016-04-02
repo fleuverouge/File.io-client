@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A212A92CF6DACB5BBB959587F93DE40328175CB3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "A212A92CF6DACB5BBB959587F93DE40328175CB3" : 0,
+    "F8994A6350AB57BCE68CCDED29D650378C7B2787" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "93C4509C-E3E7-4755-BF79-D27AF3469444",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "A212A92CF6DACB5BBB959587F93DE40328175CB3" : "FileIOClient\/",
+    "F8994A6350AB57BCE68CCDED29D650378C7B2787" : "..\/zzz_UI_libs\/Menu\/XXXRoundMenuButton"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "FRFileIOClient",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "FRFileIOClient.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/fleuverouge\/File.io-client.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A212A92CF6DACB5BBB959587F93DE40328175CB3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/zsy78191\/XXXRoundMenuButton.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F8994A6350AB57BCE68CCDED29D650378C7B2787"
+    }
+  ]
+}

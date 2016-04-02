@@ -132,6 +132,7 @@ class APIClient: NSObject {
 //                }
 //                
 //            }
+        request.validate(statusCode: [200])
         request.response { (_,response, data, error) in
                 print(response)
                 var success = false
@@ -217,7 +218,6 @@ class APIClient: NSObject {
                 progressHandler?(fraction)
             }
         }
-        request.validate(statusCode: [200])
         debugPrint(request)
         return request
     }

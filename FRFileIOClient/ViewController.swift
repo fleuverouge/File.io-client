@@ -36,6 +36,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 iv.setBorder(colors[tag], width: 2)
             }
         }
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -156,14 +158,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 }
                 var data: NSData?
 
-                if let typeImage = (kUTTypeImage as? NSString) as? String
-                    where type == typeImage,
-                    let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-                    if let lext = ext where lext.lowercaseString.containsString("png") {
-                        data = UIImagePNGRepresentation(image)
+                let typeImage = (kUTTypeImage as NSString) as String
+                if type == typeImage {
+                    if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                        if let lext = ext where lext.lowercaseString.containsString("png") {
+                            data = UIImagePNGRepresentation(image)
+                        }
+                        else {
+                            data = UIImageJPEGRepresentation(image, 1.0)
+                            }
                     }
-                    else {
-                        data = UIImageJPEGRepresentation(image, 1.0)
+                    if let data = data {
+                        let uploadVC = UploadVC(data: data, extention: ext ?? "")
+                        uploadVC.showInView(self)
                     }
                 }
                 else { // It's a video!

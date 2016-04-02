@@ -7,4 +7,3 @@ target 'FRFileIOClient' do
 pod 'Alamofire', '~> 3.0'
 pod 'FontAwesome.swift'
 end
-
