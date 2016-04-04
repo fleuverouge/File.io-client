@@ -621,6 +621,9 @@ class FilesBrowser: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        if identifier.containsString("showImage") {
+            return false
+        }
         if identifier.containsString("peekImage") {
             if let cell = sender as? FileCell,
                 let idxPath = collectionView.indexPathForCell(cell)

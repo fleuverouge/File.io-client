@@ -344,9 +344,9 @@
                                             <outlet property="fileImageView" destination="k2r-T1-SFo" id="ura-3T-JJn"/>
                                             <outlet property="fileNameLabel" destination="kYV-wi-YSZ" id="MN5-ZN-0ID"/>
                                             <outlet property="fileSizeLabel" destination="J44-Pu-gYD" id="H8Y-TL-3kJ"/>
-                                            <segue destination="rSP-o6-gfR" kind="presentation" identifier="peekImageFromGrid" id="ON3-xR-xO2">
+                                            <segue destination="rSP-o6-gfR" kind="presentation" identifier="showImageFromGrid" id="ON3-xR-xO2">
                                                 <segue key="commit" inheritsFrom="parent" id="3h6-37-gLE"/>
-                                                <segue key="preview" inheritsFrom="commit" id="Yd8-Hd-ZMU"/>
+                                                <segue key="preview" destination="rSP-o6-gfR" identifier="peekImageFromGrid" id="Yd8-Hd-ZMU"/>
                                             </segue>
                                         </connections>
                                     </collectionViewCell>
@@ -409,9 +409,9 @@
                                             <outlet property="fileImageView" destination="LN3-xH-NQs" id="cpP-go-Ogu"/>
                                             <outlet property="fileNameLabel" destination="XUC-Hp-uMk" id="rvu-aQ-CZI"/>
                                             <outlet property="fileSizeLabel" destination="Y9j-JP-fCu" id="kPH-Cg-Z23"/>
-                                            <segue destination="rSP-o6-gfR" kind="presentation" identifier="peekImageFromList" id="JNZ-77-PgA">
+                                            <segue destination="rSP-o6-gfR" kind="presentation" identifier="showImageFromList" id="JNZ-77-PgA">
                                                 <segue key="commit" inheritsFrom="parent" id="GDj-AL-sjy"/>
-                                                <segue key="preview" inheritsFrom="commit" id="R2l-Co-7Gj"/>
+                                                <segue key="preview" destination="rSP-o6-gfR" identifier="peekImageFromList" id="R2l-Co-7Gj"/>
                                             </segue>
                                         </connections>
                                     </collectionViewCell>
@@ -591,7 +591,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="JNZ-77-PgA"/>
         <segue reference="fSn-lg-kLZ"/>
+        <segue reference="JNZ-77-PgA"/>
     </inferredMetricsTieBreakers>
 </document>
