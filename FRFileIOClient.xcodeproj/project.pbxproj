@@ -25,8 +25,6 @@
 		8167DAE61CAD0ED00060DE6F /* DownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8167DAE51CAD0ED00060DE6F /* DownloadView.xib */; };
 		8167DAEB1CAD2B440060DE6F /* FilesBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8167DAEA1CAD2B440060DE6F /* FilesBrowser.swift */; };
 		8167DAEE1CAD2E650060DE6F /* FileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8167DAEC1CAD2E650060DE6F /* FileCell.swift */; };
-		8167DAEF1CAD2E650060DE6F /* FileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8167DAED1CAD2E650060DE6F /* FileCell.xib */; };
-		8167DAF11CAD30640060DE6F /* FileListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8167DAF01CAD30640060DE6F /* FileListCell.xib */; };
 		81A5505A1CACFFA800886B57 /* FRRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A550591CACFFA800886B57 /* FRRoundedView.swift */; };
 		81FD2B711CAFA751002AF666 /* FRAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FD2B701CAFA751002AF666 /* FRAutoLayout.swift */; };
 		C83915AA430D7240F5CD7F00 /* Pods_FRFileIOClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B522A605700F5D37E5BCAC /* Pods_FRFileIOClient.framework */; };
@@ -54,8 +52,6 @@
 		8167DAE51CAD0ED00060DE6F /* DownloadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadView.xib; sourceTree = "<group>"; };
 		8167DAEA1CAD2B440060DE6F /* FilesBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesBrowser.swift; sourceTree = "<group>"; };
 		8167DAEC1CAD2E650060DE6F /* FileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCell.swift; sourceTree = "<group>"; };
-		8167DAED1CAD2E650060DE6F /* FileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileCell.xib; sourceTree = "<group>"; };
-		8167DAF01CAD30640060DE6F /* FileListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileListCell.xib; sourceTree = "<group>"; };
 		81A550591CACFFA800886B57 /* FRRoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FRRoundedView.swift; sourceTree = "<group>"; };
 		81FD2B6A1CAFA666002AF666 /* FRFileIOClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FRFileIOClient-Bridging-Header.h"; sourceTree = "<group>"; };
 		81FD2B701CAFA751002AF666 /* FRAutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FRAutoLayout.swift; path = ../../../FRAutoLayoutDemo/FRAutoLayoutDemo/FRAutoLayout.swift; sourceTree = "<group>"; };
@@ -141,8 +137,6 @@
 				81252A541CAE4A54001648AE /* FRColorExt.swift */,
 				8167DAEA1CAD2B440060DE6F /* FilesBrowser.swift */,
 				8167DAEC1CAD2E650060DE6F /* FileCell.swift */,
-				8167DAED1CAD2E650060DE6F /* FileCell.xib */,
-				8167DAF01CAD30640060DE6F /* FileListCell.xib */,
 				81252A521CAE1649001648AE /* FRRect.swift */,
 			);
 			path = FilesBrowser;
@@ -222,8 +216,6 @@
 				8167DAE61CAD0ED00060DE6F /* DownloadView.xib in Resources */,
 				81252A591CAE4DD4001648AE /* UploadVC.xib in Resources */,
 				8116720B1CACCB0D00E5263A /* Assets.xcassets in Resources */,
-				8167DAF11CAD30640060DE6F /* FileListCell.xib in Resources */,
-				8167DAEF1CAD2E650060DE6F /* FileCell.xib in Resources */,
 				811672091CACCB0D00E5263A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

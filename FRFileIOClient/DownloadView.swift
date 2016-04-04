@@ -16,7 +16,10 @@ class DownloadView: UIView {
     @IBOutlet weak var progressView: UIProgressView!
     
     class func view() -> DownloadView {
-        return UIView.loadFromNibNamed("DownloadView") as! DownloadView
+        let output = UIView.loadFromNibNamed("DownloadView") as! DownloadView
+        output.progressView.tintColor = ColorTemplate.MainTint
+        output.subviews[0].layer.cornerRadius = 4
+        return output
     }
     
     required init?(coder aDecoder: NSCoder) {

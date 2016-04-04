@@ -37,7 +37,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
         
-        
+        let shortcut = UIApplicationShortcutItem(type: "hh.test.FileIOClient.downloadFromClipboard", localizedTitle: "Quick download", localizedSubtitle: "from clipboard", icon: UIApplicationShortcutIcon(type: .Add), userInfo: nil)
+        UIApplication.sharedApplication().shortcutItems = [shortcut]
     }
 
     override func didReceiveMemoryWarning() {

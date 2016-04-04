@@ -18,6 +18,9 @@ class APIClient: NSObject {
     static let baseHost = "https://file.io"
     
     class func download(fileKey: String, fileNameHandler: ((String?) -> ())? = nil, progressHandler: ((Double) ->())? = nil, completion: ((result: RequestResult) ->())? = nil) -> Request? {
+        if (fileKey == "") {
+            completion?(result: .Failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "File key is empty"])))
+        }
         var correctKey = fileKey
         if (fileKey.containsString(baseHost)) {
             correctKey = fileKey.stringByReplacingOccurrencesOfString(baseHost + "/", withString: "")
@@ -178,39 +181,36 @@ class APIClient: NSObject {
                     completion?(result: .Failure(error))
                     return
                 }
-
-                if let response = response {
-                    if let data = data {
-                        if (response.statusCode != 200) {
-                            do {
-                                let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
-                                if let message = json.valueForKey("message") {
-                                    let code = (json.valueForKey("error") as? Int) ?? 0
-                                    completion?(result: .Failure(NSError(domain: "file.io", code: code, userInfo: [NSLocalizedDescriptionKey: message])))
-                                }
-                                else {
-                                    completion?(result: .Failure(nil))
-                                }
-                            }
-                            catch (let error) {
-                                print("<ERROR> \(error)")
-                                completion?(result: .Failure(nil))
-                                
-                            }
-                        }
-                        else {
-                            success = true
-                        }
+            
+            if (response?.statusCode == 200) {
+                success = true
+                completion?(result: .Success(nil))
+                return
+            }
+            
+            if let data = data {
+                do {
+                    let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
+                    if let message = json.valueForKey("message") {
+                        let code = (json.valueForKey("error") as? Int) ?? 0
+                        completion?(result: .Failure(NSError(domain: "file.io", code: code, userInfo: [NSLocalizedDescriptionKey: message])))
                     }
                     else {
-                        completion?(result: .Failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Data not found"])))
+                        completion?(result: .Failure(nil))
                     }
                 }
-                else {
-                    completion?(result: .Failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Response not found"])))
+                catch (let error) {
+                    print("<ERROR> \(error)")
+                    completion?(result: .Failure(nil))
+                    
                 }
-
+                
             }
+            else {
+                completion?(result: .Failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Data not found"])))
+            }
+        }
+
         request.progress { (_,_,_) in
             let fraction = request.progress.fractionCompleted
             print("Fraction completed: \(fraction)")

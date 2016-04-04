@@ -49,6 +49,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+        if shortcutItem.type == "hh.test.FileIOClient.downloadFromClipboard" {
+            let nav = self.window!.rootViewController as! UINavigationController
+            let mainVC = nav.viewControllers.first as! ViewController
+            mainVC.downloadFile(UIPasteboard.generalPasteboard().string ?? "")
+            completionHandler(true)
+        }
+        
+        completionHandler(false)
+    }
 
 }
 

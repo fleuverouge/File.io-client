@@ -22,20 +22,9 @@ enum FBViewOption {
         get {
             switch self {
             case .Grid:
-                return "GridCell"
+                return "FileCellGrid"
             case .List:
-                return "ListCell"
-            }
-        }
-    }
-    
-    var cellXibName: String {
-        get {
-            switch self {
-            case .Grid:
-                return "FileCell"
-            case .List: 
-                return "FileListCell"
+                return "FileCellList"
             }
         }
     }
@@ -175,7 +164,7 @@ class FilesBrowser: UIViewController, UICollectionViewDelegate, UICollectionView
     var viewOption = FBViewOption.Grid
     var files = [FBFile]()
     var imageSize = CGSizeZero
-    var cellReuseIdentifier = "GridCell"
+    var cellReuseIdentifier = FBViewOption.Grid.cellIdentifier
     var action = FBAction.Browse
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -211,11 +200,11 @@ class FilesBrowser: UIViewController, UICollectionViewDelegate, UICollectionView
         let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(22)] as Dictionary!
         let refreshItem = UIBarButtonItem(title: String.fontAwesomeIconWithName(.Refresh), style: .Plain, target: self, action: #selector(FilesBrowser.loadFilesList(_:)))
         refreshItem.setTitleTextAttributes(attributes, forState: .Normal)
-        let styleItem = UIBarButtonItem(title: viewOption.title, style: .Plain, target: self, action: #selector(FilesBrowser.switchViewOption(_:)))
+        let styleItem = UIBarButtonItem(title: FBViewOption.List.title, style: .Plain, target: self, action: #selector(FilesBrowser.switchViewOption(_:)))
         styleItem.setTitleTextAttributes(attributes, forState: .Normal)
         
-        collectionView.registerNib(UINib(nibName: FBViewOption.Grid.cellXibName, bundle: nil), forCellWithReuseIdentifier: FBViewOption.Grid.cellIdentifier)
-        collectionView.registerNib(UINib(nibName: FBViewOption.List.cellXibName, bundle: nil), forCellWithReuseIdentifier: FBViewOption.List.cellIdentifier)
+//        collectionView.registerNib(UINib(nibName: FBViewOption.Grid.cellXibName, bundle: nil), forCellWithReuseIdentifier: FBViewOption.Grid.cellIdentifier)
+//        collectionView.registerNib(UINib(nibName: FBViewOption.List.cellXibName, bundle: nil), forCellWithReuseIdentifier: FBViewOption.List.cellIdentifier)
         
         navigationItem.rightBarButtonItems = [styleItem, refreshItem]
         
@@ -398,6 +387,7 @@ class FilesBrowser: UIViewController, UICollectionViewDelegate, UICollectionView
             //            print(files)
             files = [FBFile]()
             for fileURL in directoryContents {
+                try fileURL.setResourceValue(true, forKey: NSURLIsExcludedFromBackupKey)
                 files.append(FBFile(fileUrl: fileURL))
             }
             collectionView.reloadData()
@@ -627,6 +617,31 @@ class FilesBrowser: UIViewController, UICollectionViewDelegate, UICollectionView
         }
         if (tagInt > 101) {
             performSelector(#selector(FilesBrowser.showButton(_:)), withObject: NSNumber(integer: tagInt-1), afterDelay: 0.1)
+        }
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        if identifier.containsString("peekImage") {
+            if let cell = sender as? FileCell,
+                let idxPath = collectionView.indexPathForCell(cell)
+            where files[idxPath.item].type == .Image {
+                    return true
+            }
+            return false
+        }
+        return true
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let identifier = segue.identifier where identifier.containsString("peekImage"),
+            let cell = sender as? FileCell,
+            let idxPath = collectionView.indexPathForCell(cell)
+            where files[idxPath.item].type == .Image,
+            let iv = segue.destinationViewController.view.viewWithTag(101) as? UIImageView{
+            iv.image = cell.fileImageView.image
+        }
+        else {
+            super.prepareForSegue(segue, sender: sender)
         }
     }
 }
