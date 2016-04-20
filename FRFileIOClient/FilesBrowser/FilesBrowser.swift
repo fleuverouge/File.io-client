@@ -8,6 +8,8 @@
 
 import UIKit
 import FontAwesome_swift
+import LocalAuthentication
+import Locksmith
 
 enum FBAction {
     case Browse
@@ -166,6 +168,12 @@ class FilesBrowser: UIViewController, UICollectionViewDelegate, UICollectionView
     var imageSize = CGSizeZero
     var cellReuseIdentifier = FBViewOption.Grid.cellIdentifier
     var action = FBAction.Browse
+    var needAuthenticate = false
+    var locked = false {
+        didSet {
+            lockItem.title = String.fontAwesomeIconWithName(locked ? .Unlock : .Lock)
+        }
+    }
     @IBOutlet weak var collectionView: UICollectionView!
     
     required init?(coder aDecoder: NSCoder) {
@@ -176,6 +184,8 @@ class FilesBrowser: UIViewController, UICollectionViewDelegate, UICollectionView
 //    private let menu = XXXRoundMenuButton()
     
     @IBOutlet weak var menu: UIStackView!
+    
+    private var lockItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -203,10 +213,10 @@ class FilesBrowser: UIViewController, UICollectionViewDelegate, UICollectionView
         let styleItem = UIBarButtonItem(title: FBViewOption.List.title, style: .Plain, target: self, action: #selector(FilesBrowser.switchViewOption(_:)))
         styleItem.setTitleTextAttributes(attributes, forState: .Normal)
         
-//        collectionView.registerNib(UINib(nibName: FBViewOption.Grid.cellXibName, bundle: nil), forCellWithReuseIdentifier: FBViewOption.Grid.cellIdentifier)
-//        collectionView.registerNib(UINib(nibName: FBViewOption.List.cellXibName, bundle: nil), forCellWithReuseIdentifier: FBViewOption.List.cellIdentifier)
+        lockItem = UIBarButtonItem(title: "", style: .Plain, target: self, action: #selector(FilesBrowser.didTapLockItem))
+        lockItem.setTitleTextAttributes(attributes, forState: .Normal)
         
-        navigationItem.rightBarButtonItems = [styleItem, refreshItem]
+        navigationItem.rightBarButtonItems = [styleItem, refreshItem, lockItem]
         
         view.backgroundColor = ColorTemplate.MainBackground
         collectionView.backgroundColor = ColorTemplate.MainBackground
@@ -251,7 +261,23 @@ class FilesBrowser: UIViewController, UICollectionViewDelegate, UICollectionView
         }
         menu.hidden = true
         updateItemSize()
-        loadFilesList(nil)
+        locked = NSUserDefaults.standardUserDefaults().boolForKey("hasLoginKey")
+        if locked == true {
+            needAuthenticate = true
+        }
+        else {
+            loadFilesList(nil)
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if (needAuthenticate) {
+            authenticateUser(successHandler: {[weak self] in
+                self?.needAuthenticate = false
+                self?.loadFilesList(nil)
+            })
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -371,6 +397,13 @@ class FilesBrowser: UIViewController, UICollectionViewDelegate, UICollectionView
     
     //MARK: -
     func loadFilesList(sender: AnyObject?) {
+        guard needAuthenticate == false else {
+            authenticateUser(successHandler: {[weak self] in
+                self?.needAuthenticate = false
+                self?.loadFilesList(sender)
+                })
+            return
+        }
         defer {
             collectionView.hidden = files.count == 0
             emptyView.hidden = !collectionView.hidden
@@ -646,5 +679,158 @@ class FilesBrowser: UIViewController, UICollectionViewDelegate, UICollectionView
         else {
             super.prepareForSegue(segue, sender: sender)
         }
+    }
+    
+    //MARK: - Security
+    
+    func didTapLockItem() {
+        if (locked) {
+            authenticateUser("Remove passcode", successHandler: { [weak self] in
+                do {
+                    try Locksmith.deleteDataForUserAccount("FileBrowser")
+                    NSUserDefaults.standardUserDefaults().removeObjectForKey("hasLoginKey")
+                    NSUserDefaults.standardUserDefaults().synchronize()
+                    self?.locked = false
+                }
+                catch (let error as NSError) {
+                    print("Error: \(error.localizedDescription)")
+                    self?.showError("An error occured. Please try again later!")
+                }
+            })
+        }
+        else {
+            showSetPasscodeAlert()
+        }
+    }
+    
+    func authenticateUser(reasonString: String = "Authentication is needed to access your files.", successHandler: ()->()) {
+        // Get the local authentication context.
+        let context = LAContext()
+        
+        // Declare a NSError variable.
+        var error: NSError?
+        
+        // Set the reason string that will appear on the authentication alert.
+        
+        // Check if the device can evaluate the policy.
+        if context.canEvaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, error: &error) {
+            [context .evaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: {[weak self] (success: Bool, evalPolicyError: NSError?) -> Void in
+                if success {
+                    successHandler()
+                }
+                else{
+                    // If authentication failed then show a message to the console with a short description.
+                    // In case that the error is a user fallback, then show the password alert view.
+                    print(evalPolicyError?.localizedDescription)
+                    let logError: String
+                    switch LAError(rawValue: evalPolicyError!.code) {
+                    case .Some(let error):
+                        switch error {
+                        case .UserCancel:
+                            logError = "Authentication was cancelled by the user"
+                        case .UserFallback:
+                            logError = "User selected to enter custom password"
+                            FRQueue.Main.execute(closure: {
+                                self?.showPasswordAlert(successHandler: successHandler)
+                            })
+                        case .SystemCancel:
+                            logError = "Authentication was cancelled by the system"
+                        default:
+                            logError = "Authentication failed"
+                            FRQueue.Main.execute(closure: {
+                                self?.showPasswordAlert(successHandler: successHandler)
+                            })
+                        }
+                    default:
+                        logError = "Unknown error"
+                        FRQueue.Main.execute(closure: {
+                            self?.showPasswordAlert(successHandler: successHandler)
+                        })
+                    }
+                    print(logError)
+                }
+                })]
+        }
+        
+        if let error = error {
+            print("<ERROR> " + error.localizedDescription)
+            let logError: String
+            switch LAError(rawValue: error.code) {
+            case .Some(let error):
+                switch error {
+                case .TouchIDNotEnrolled:
+                    logError = "TouchID is not enrolled"
+                case .PasscodeNotSet:
+                    logError = "A passcode has not been set"
+                default:
+                    logError = "TouchID not available"
+                }
+                
+            default:
+                logError = "Unknown error"
+            }
+            print(logError)
+            
+            showPasswordAlert(successHandler: successHandler)
+        }
+    }
+    
+    func showPasswordAlert(message: String = "Please enter your passcode", successHandler: ()->()) {
+        var inputTextField: UITextField?
+        let passwordAlert = UIAlertController(title: nil, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        passwordAlert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default) {[weak self] (_) in
+            if let itf = inputTextField,
+                let pw = itf.text where pw.characters.count != 0 {
+                if let data = Locksmith.loadDataForUserAccount("FileBrowser"),
+                    let passcode = data["passcode"] as? String where passcode == pw {
+                    successHandler()
+                }
+                else {
+                    self?.showError("Incorrect passcode")
+                }
+            }
+            else {
+                self?.showPasswordAlert(successHandler: successHandler)
+            }
+            })
+        passwordAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+        passwordAlert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+            textField.secureTextEntry = true
+            textField.keyboardType = UIKeyboardType.NumberPad
+            inputTextField = textField
+        })
+        passwordAlert.view.setNeedsLayout()
+        presentViewController(passwordAlert, animated: true, completion: nil)
+    }
+    
+    func showSetPasscodeAlert() {
+        var inputTextField: UITextField?
+        let passwordAlert = UIAlertController(title: nil, message: "Please enter your desired passcode", preferredStyle: UIAlertControllerStyle.Alert)
+        passwordAlert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default) {[weak self] (_) in
+            if let itf = inputTextField,
+                let pw = itf.text where pw.characters.count != 0 {
+                do {
+                    try Locksmith.saveData(["passcode": pw], forUserAccount: "FileBrowser")
+                    NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLoginKey")
+                    NSUserDefaults.standardUserDefaults().synchronize()
+                    self?.locked = true
+                }
+                catch (let error as NSError) {
+                    print("Error: \(error.localizedDescription)")
+                    self?.showError("An error occured. Please try again later!")
+                }
+            }
+            else {
+                self?.showSetPasscodeAlert()
+            }
+            })
+        passwordAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+        passwordAlert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+            textField.secureTextEntry = true
+            textField.keyboardType = UIKeyboardType.NumberPad
+            inputTextField = textField
+        })
+        passwordAlert.view.setNeedsLayout()
+        presentViewController(passwordAlert, animated: true, completion: nil)
     }
 }

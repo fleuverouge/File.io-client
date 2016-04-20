@@ -26,6 +26,7 @@
 		8167DAEB1CAD2B440060DE6F /* FilesBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8167DAEA1CAD2B440060DE6F /* FilesBrowser.swift */; };
 		8167DAEE1CAD2E650060DE6F /* FileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8167DAEC1CAD2E650060DE6F /* FileCell.swift */; };
 		81A5505A1CACFFA800886B57 /* FRRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A550591CACFFA800886B57 /* FRRoundedView.swift */; };
+		81C62A6C1CC727010048AF42 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C62A6B1CC727010048AF42 /* LocalAuthentication.framework */; };
 		81FD2B711CAFA751002AF666 /* FRAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FD2B701CAFA751002AF666 /* FRAutoLayout.swift */; };
 		C83915AA430D7240F5CD7F00 /* Pods_FRFileIOClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B522A605700F5D37E5BCAC /* Pods_FRFileIOClient.framework */; };
 /* End PBXBuildFile section */
@@ -53,6 +54,7 @@
 		8167DAEA1CAD2B440060DE6F /* FilesBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesBrowser.swift; sourceTree = "<group>"; };
 		8167DAEC1CAD2E650060DE6F /* FileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCell.swift; sourceTree = "<group>"; };
 		81A550591CACFFA800886B57 /* FRRoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FRRoundedView.swift; sourceTree = "<group>"; };
+		81C62A6B1CC727010048AF42 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		81FD2B6A1CAFA666002AF666 /* FRFileIOClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FRFileIOClient-Bridging-Header.h"; sourceTree = "<group>"; };
 		81FD2B701CAFA751002AF666 /* FRAutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FRAutoLayout.swift; path = ../../../FRAutoLayoutDemo/FRAutoLayoutDemo/FRAutoLayout.swift; sourceTree = "<group>"; };
 		A0EBC925CB1171390D485364 /* Pods-FRFileIOClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FRFileIOClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FRFileIOClient/Pods-FRFileIOClient.debug.xcconfig"; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81C62A6C1CC727010048AF42 /* LocalAuthentication.framework in Frameworks */,
 				C83915AA430D7240F5CD7F00 /* Pods_FRFileIOClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,6 +77,7 @@
 		5A0BCF1BA83DFA3F09C08F2E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				81C62A6B1CC727010048AF42 /* LocalAuthentication.framework */,
 				D8B522A605700F5D37E5BCAC /* Pods_FRFileIOClient.framework */,
 			);
 			name = Frameworks;

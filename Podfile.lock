@@ -1,13 +1,16 @@
 PODS:
   - Alamofire (3.3.0)
   - FontAwesome.swift (0.7.1)
+  - Locksmith (2.0.8)
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
   - FontAwesome.swift
+  - Locksmith
 
 SPEC CHECKSUMS:
   Alamofire: 9054db4a1b1ca9e363223183e01cea380159a27c
   FontAwesome.swift: 21ec9db57af8b92d4b4d6ca8208b9ae07031e828
+  Locksmith: a8ed41ac4c06506ea8cb199d8ec8a8d3d108eb2a
 
 COCOAPODS: 0.39.0
